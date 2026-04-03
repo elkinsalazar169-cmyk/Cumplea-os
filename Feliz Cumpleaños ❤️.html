@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Elizabeth · 21 Velas Mágicas ✨</title>
+<!-- Fuentes elegantes -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,500&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(145deg, #fee7ef 0%, #ffe6dc 100%);
+        min-height: 100vh;
+        overflow-x: hidden;
+        position: relative;
+    }
+
+    /* fondo con estrellas sutiles */
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: radial-gradient(#ffb7c5 1.2px, transparent 1.2px);
+        background-size: 35px 35px;
+        opacity: 0.25;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    /* navegación tipo pestañas elegante */
+    .nav-tabs {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px 15px;
+        flex-wrap: wrap;
+        position: relative;
+        z-index: 20;
+        background: rgba(255, 245, 240, 0.7);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 200, 190, 0.6);
+    }
+
+    .tab-btn {
+        background: rgba(255, 255, 255, 0.5);
+        border: none;
+        padding: 12px 28px;
+        border-radius: 50px;
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: #b34763;
+        cursor: pointer;
+        backdrop-filter: blur(4px);
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-family: 'Poppins', sans-serif;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .tab-btn i {
+        font-size: 1.2rem;
+    }
+
+    .tab-btn.active {
+        background: #ff6b8b;
+        color: white;
+        box-shadow: 0 8px 20px rgba(255, 80, 120, 0.4);
+        transform: translateY(-2px);
+    }
+
+    .tab-btn:hover:not(.active) {
+        background: #ffe0e8;
+        color: #c23b5e;
+        transform: translateY(-2px);
+    }
+
+    /* contenedor de páginas */
+    .pages-wrapper {
+        max-width: 1300px;
+        margin: 30px auto;
+        padding: 0 20px;
+        position: relative;
+        z-index: 10;
+    }
+
+    .page {
+        display: none;
+        animation: fadeScale 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+        background: rgba(255, 250, 245, 0.75);
+        backdrop-filter: blur(12px);
+        border-radius: 70px 40px 70px 40px;
+        padding: 2.5rem 2rem;
+        box-shadow: 0 30px 45px -15px rgba(110, 40, 50, 0.25);
+        border: 1px solid rgba(255, 220, 200, 0.9);
+    }
+
+    .page.active-page {
+        display: block;
+    }
+
+    @keyframes fadeScale {
+        0% { opacity: 0; transform: scale(0.97) translateY(15px); }
+        100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* tipografía bonita */
+    h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 3.5rem;
+        background: linear-gradient(135deg, #c63760, #ff8a6b);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        margin-bottom: 0.5rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+        color: #b64062;
+        font-weight: 600;
+        border-left: 6px solid #ff9f86;
+        padding-left: 20px;
+        margin-bottom: 1.2rem;
+        display: inline-block;
+    }
+
+    .poem-box {
+        background: rgba(255, 240, 230, 0.7);
+        border-radius: 60px;
+        padding: 35px 25px;
+        margin: 30px 0;
+        text-align: center;
+        font-family: 'Playfair Display', serif;
+        font-size: 1.3rem;
+        line-height: 1.8;
+        color: #5f3344;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        border: 1px solid #ffe0d0;
+    }
+
+    .highlight-date {
+        background: #ffded0;
+        display: inline-block;
+        border-radius: 100px;
+        padding: 0.3rem 1.2rem;
+        font-weight: bold;
+        color: #bc4f6c;
+        font-size: 1.1rem;
+    }
+
+    .cards-mini {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 25px;
+        margin: 35px 0;
+    }
+
+    .mini-card {
+        background: white;
+        border-radius: 40px;
+        padding: 20px 18px;
+        width: 180px;
+        text-align: center;
+        transition: all 0.3s;
+        background: rgba(255, 250, 245, 0.95);
+        box-shadow: 0 15px 25px rgba(0,0,0,0.05);
+    }
+
+    .mini-card i {
+        font-size: 2.8rem;
+        color: #ff7f9f;
+        margin-bottom: 12px;
+    }
+
+    .btn-magic {
+        background: #ff6f8f;
+        border: none;
+        padding: 14px 32px;
+        border-radius: 50px;
+        font-weight: 600;
+        color: white;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: 0.2s;
+        margin: 20px 0;
+        box-shadow: 0 6px 14px #ffb7c5;
+    }
+
+    .btn-magic:hover {
+        background: #f15073;
+        transform: scale(1.02);
+        box-shadow: 0 12px 22px #ff9bb0;
+    }
+
+    .razones-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+        gap: 16px;
+        margin-top: 20px;
+    }
+
+    .razon-item {
+        background: #fff7f2;
+        padding: 12px 15px;
+        border-radius: 60px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 500;
+        color: #a34866;
+        transition: 0.1s;
+        border: 1px solid #ffdad2;
+    }
+
+    .galeria-simbolica {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 25px;
+        margin: 35px 0;
+    }
+
+    .momento {
+        background: #fff4ed;
+        border-radius: 45px;
+        padding: 20px;
+        text-align: center;
+        width: 200px;
+    }
+
+    footer {
+        text-align: center;
+        padding: 30px 20px 25px;
+        color: #b75470;
+        font-weight: 500;
+        font-size: 0.9rem;
+    }
+
+    .floating-emoji {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        font-size: 2rem;
+        opacity: 0.5;
+        pointer-events: none;
+        z-index: 99;
+    }
+
+    @media (max-width: 680px) {
+        h1 { font-size: 2.3rem; }
+        .page { padding: 1.5rem; }
+        .tab-btn { padding: 8px 18px; font-size: 0.85rem; }
+        .poem-box { font-size: 1rem; padding: 25px; }
+    }
+
+    .carta-especial {
+        background: linear-gradient(145deg, #fff4ee, #ffe7df);
+        border-radius: 55px;
+        padding: 35px;
+        margin-top: 20px;
+        text-align: left;
+        font-size: 1.05rem;
+        line-height: 1.6;
+        border: 1px solid #ffcfbf;
+    }
+</style>
+</head>
+<body>
+
+<div class="nav-tabs">
+    <button class="tab-btn active" data-page="page1"><i class="fas fa-star"></i> Inicio mágico</button>
+    <button class="tab-btn" data-page="page2"><i class="fas fa-feather-alt"></i> Poema & 21</button>
+    <button class="tab-btn" data-page="page3"><i class="fas fa-gem"></i> Razones + Brillo</button>
+    <button class="tab-btn" data-page="page4"><i class="fas fa-envelope-heart"></i> Carta al alma</button>
+</div>
+
+<div class="pages-wrapper">
+    <!-- PÁGINA 1: PRESENTACIÓN INNOVADORA SIN FECHA EXPLÍCITA PERO CON MAGIA DE "MAÑANA" -->
+    <div id="page1" class="page active-page">
+        <div style="text-align: center;">
+            <span style="font-size: 5rem;">🎂✨👑</span>
+            <h1>Elizabeth · 21 🌙</h1>
+            <p style="font-size: 1.3rem; color:#bc5d78; margin-bottom: 10px;"><i class="fas fa-hourglass-half"></i> El universo se alinea para celebrarte</p>
+            <div class="highlight-date" style="margin-bottom: 20px;">
+                <i class="fas fa-calendar-day"></i> Cuando la luna abrace al sol, será tu día especial
+            </div>
+            <div class="cards-mini">
+                <div class="mini-card"><i class="fas fa-crown"></i><h3>Reina de abril</h3><p>Tu mes, tu brillo</p></div>
+                <div class="mini-card"><i class="fas fa-meteor"></i><h3>21 cometas</h3><p>Un nuevo ciclo estelar</p></div>
+                <div class="mini-card"><i class="fas fa-heartbeat"></i><h3>Latidos eternos</h3><p>Cada año más especial</p></div>
+            </div>
+            <button class="btn-magic" id="btnAmanecer"><i class="fas fa-sun"></i> Descubre la sorpresa del amanecer</button>
+            <div id="amanecerMsg" style="margin: 20px auto; background: #ffe5dc; border-radius: 70px; padding: 18px; max-width: 450px; font-weight: 500; color:#b14d6b;"></div>
+            <div class="poem-box" style="background: rgba(255,235,225,0.8); margin-top: 20px;">
+                <i class="fas fa-quote-left" style="font-size: 2rem; color:#f29eb0;"></i>
+                <p style="font-style: italic;">"Tu viaje alrededor del sol número 21 está a punto de florecer.<br>
+                Mañana, cuando despiertes, la magia será más real que nunca."</p>
+                <p><strong>✨ Todo está listo para ti ✨</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PÁGINA 2: POEMA ORIGINAL Y LA BELLEZA DE LOS 21 -->
+    <div id="page2" class="page">
+        <div style="text-align: center;">
+            <h2><i class="fas fa-feather"></i> Poema para tus 21</h2>
+            <div class="poem-box">
+                <p>Elizabeth, cuando abril despliega su manto,<br>
+                las flores saben que ha llegado un encanto.<br>
+                No hace falta un número, ni un día marcado,<br>
+                tu luz baila libre como un verso dorado.</p>
+                <p>Veintiún primaveras tejen tu sonrisa,<br>
+                cada latido es una estrella indecisa<br>
+                que eligió quedarse en tu mirada sincera,<br>
+                para hacer de este mundo una hoguera quimera.</p>
+                <p>Que el mañana te envuelva con besos de cielo,<br>
+                que el pasado sea polvo y el futuro un vuelo.<br>
+                Porque eres la dueña de todos los sueños,<br>
+                y hoy la luna te escribe versos pequeños.</p>
+                <p style="margin-top: 20px;"><strong>✨ Feliz cumpleaños, princesa de 21 abriles ✨</strong></p>
+                <i class="fas fa-heart" style="color:#ec7592; font-size: 1.8rem;"></i>
+            </div>
+            <div class="galeria-simbolica">
+                <div class="momento"><i class="fas fa-moon"></i><br>La noche previa<br>a tu gran día</div>
+                <div class="momento"><i class="fas fa-sun"></i><br>Brillarás<br>como nunca</div>
+                <div class="momento"><i class="fas fa-dove"></i><br>Liberas felicidad<br>a tu paso</div>
+            </div>
+            <p><span class="highlight-date"><i class="far fa-clock"></i> Cuando el reloj marque el inicio de tu nueva vuelta al sol</span></p>
+        </div>
+    </div>
+
+    <!-- PÁGINA 3: 21 RAZONES Y UNA SORPRESA DE BRILLO -->
+    <div id="page3" class="page">
+        <div style="text-align: center;">
+            <h2><i class="fas fa-list-heart"></i> 21 destellos de tu esencia</h2>
+            <div class="razones-grid" id="listaRazones">
+                <!-- se llenará con js pero también podemos poner algunas fijas dinámicas -->
+            </div>
+            <button class="btn-magic" id="btnBrilloExtra"><i class="fas fa-sparkles"></i> Haz brillar las razones ✨</button>
+            <div id="mensajeBrillo" style="margin: 20px; font-weight: 600; color: #be6080;"></div>
+            <div class="poem-box" style="margin-top: 25px;">
+                <i class="fas fa-gift"></i> <strong>Un número mágico:</strong> 21 son las constelaciones que te admiran.
+            </div>
+        </div>
+    </div>
+
+    <!-- PÁGINA 4: CARTA SECRETA + MENSAJE PROFUNDO, SIN FECTA LITERAL PERO CON ALUSIÓN -->
+    <div id="page4" class="page">
+        <div style="text-align: center;">
+            <h2><i class="fas fa-envelope-open-text"></i> Palabras que nacen del alma</h2>
+            <div class="carta-especial">
+                <i class="fas fa-quote-right" style="font-size: 2rem; color:#e993ae; float: right;"></i>
+                <p>Querida Elizabeth,</p>
+                <p>Hay personas que iluminan sin necesidad de fuego. Tú eres una de ellas. En estos 21 años que hoy se coronan (justo cuando la primavera está en su punto más dulce), quiero recordarte que cada latido tuyo construye un mundo más bonito. No hace falta mirar el calendario para saber que mañana el sol saldrá con más fuerza porque es <strong>tu nuevo comienzo</strong>.</p>
+                <p>Que esta nueva edad te regale valentía para perseguir lo que sueñas, ternura para abrazar lo que eres y una certeza: <strong>eres infinitamente valiosa</strong>. Cada vez que sonríes, el universo entero celebra. Gracias por existir, por ser esa luz, esa presencia que transforma lo ordinario en extraordinario.</p>
+                <p>Disfruta cada segundo de tu día especial. Te mereces todo el amor, todas las risas y todos los atardeceres pintados de rosa.</p>
+                <p style="margin-top: 20px;"><i class="fas fa-feather"></i> Con cariño eterno, alguien que te lleva en el corazón.</p>
+                <div style="text-align: center; margin-top: 25px;">
+                    <i class="fas fa-crown" style="color:#ff8aa8;"></i> <span style="font-weight: bold;">Para ti, en el día que el mundo se viste de fiesta.</span>
+                </div>
+            </div>
+            <button id="btnConfetiFinal" class="btn-magic" style="margin-top: 25px;"><i class="fas fa-confetti"></i> Envía una lluvia de estrellas</button>
+            <div id="finalMensaje" style="margin: 15px;"></div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <i class="fas fa-infinity"></i> Elizabeth · 21 · Un nuevo amanecer te espera <i class="fas fa-heart" style="color:#ff718f;"></i>
+</footer>
+<div class="floating-emoji">
+    🎈✨🎂
+</div>
+
+<script>
+    // === DATOS DE RAZONES (21) ===
+    const razones = [
+        "Tu sonrisa cura cualquier tormenta", "Tienes una luz que enamora", "Eres leal como pocas",
+        "Tu forma de ver la vida es arte", "Sabes escuchar con el corazón", "Haces reír hasta las estrellas",
+        "Tienes una fortaleza increíble", "Cada día aprendo algo bello contigo", "Tu energía es pura magia",
+        "Eres auténtica, sin filtros", "Iluminas las reuniones solo con estar", "Tus abrazos saben a hogar",
+        "Eres valiente ante los desafíos", "Tienes una imaginación que enamora", "Tu mirada es profunda y genuina",
+        "Siempre buscas lo mejor para los demás", "Eres un ejemplo de bondad", "Contigo el tiempo pasa volando y bonito",
+        "Haces que los pequeños momentos sean eternos", "Tu risa es mi sonido favorito", "Porque eres TÚ, única y maravillosa"
+    ];
+
+    // cargar razones en página 3
+    const listaContainer = document.getElementById('listaRazones');
+    if(listaContainer) {
+        razones.forEach((razon, idx) => {
+            const div = document.createElement('div');
+            div.className = 'razon-item';
+            div.innerHTML = `<i class="fas fa-heart" style="color:#ff88a5;"></i> <span><strong>${idx+1}.</strong> ${razon}</span>`;
+            listaContainer.appendChild(div);
+        });
+    }
+
+    // --- SISTEMA DE PESTAÑAS (4 páginas) ---
+    const tabs = document.querySelectorAll('.tab-btn');
+    const pages = document.querySelectorAll('.page');
+
+    function activatePage(pageId) {
+        pages.forEach(page => page.classList.remove('active-page'));
+        const targetPage = document.getElementById(pageId);
+        if(targetPage) targetPage.classList.add('active-page');
+        tabs.forEach(tab => {
+            tab.classList.remove('active');
+            if(tab.getAttribute('data-page') === pageId) {
+                tab.classList.add('active');
+            }
+        });
+    }
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const pageId = tab.getAttribute('data-page');
+            activatePage(pageId);
+        });
+    });
+
+    // --- SORPRESA DEL AMANECER (PÁGINA 1) sin fecha literal, solo alusión poética a "mañana"
+    const btnAmanecer = document.getElementById('btnAmanecer');
+    const amanecerMsg = document.getElementById('amanecerMsg');
+    if(btnAmanecer) {
+        btnAmanecer.addEventListener('click', () => {
+            amanecerMsg.innerHTML = '<i class="fas fa-sun-plant-wilt"></i> 🌅 Cuando el reloj marque el inicio de un nuevo ciclo, 21 velas encenderán la magia. ✨ Que tu mañana sea tan radiante como tu alma. 💖 ¡Feliz cumpleaños adelantado, Elizabeth!';
+            // confeti
+            crearConfetiLigero();
+            // añadir emoji flotante extra
+        });
+    }
+
+    // --- BRILLO EXTRA EN PÁGINA 3 (resaltar razones) ---
+    const btnBrillo = document.getElementById('btnBrilloExtra');
+    const mensajeBrillo = document.getElementById('mensajeBrillo');
+    if(btnBrillo) {
+        btnBrillo.addEventListener('click', () => {
+            const items = document.querySelectorAll('.razon-item');
+            items.forEach((item, index) => {
+                item.style.transition = '0.2s';
+                item.style.backgroundColor = '#fff0e8';
+                item.style.boxShadow = '0 0 8px #ffbfb0';
+                setTimeout(() => {
+                    item.style.backgroundColor = '';
+                    item.style.boxShadow = '';
+                }, 600);
+            });
+            mensajeBrillo.innerHTML = '✨ ¡21 chispas de amor para Elizabeth! ✨ Cada razón brilla porque tú existes.';
+            setTimeout(() => {
+                mensajeBrillo.style.opacity = '1';
+            }, 50);
+            crearConfetiLigero();
+        });
+    }
+
+    // Confeti bonito y ligero
+    function crearConfetiLigero() {
+        const confContainer = document.createElement('div');
+        confContainer.style.position = 'fixed';
+        confContainer.style.top = '0';
+        confContainer.style.left = '0';
+        confContainer.style.width = '100%';
+        confContainer.style.height = '100%';
+        confContainer.style.pointerEvents = 'none';
+        confContainer.style.zIndex = '9999';
+        document.body.appendChild(confContainer);
+        const colores = ['#ffb7c5', '#ff8aa8', '#ffc3a0', '#ffd966', '#f4acb7', '#c9e4de'];
+        for(let i=0;i<150;i++) {
+            const conf = document.createElement('div');
+            conf.style.position = 'absolute';
+            conf.style.width = Math.random() * 12 + 6 + 'px';
+            conf.style.height = Math.random() * 12 + 6 + 'px';
+            conf.style.backgroundColor = colores[Math.floor(Math.random()*colores.length)];
+            conf.style.borderRadius = Math.random() > 0.6 ? '50%' : '20% 60%';
+            conf.style.left = Math.random() * 100 + '%';
+            conf.style.top = '-20px';
+            conf.style.opacity = Math.random() * 0.9 + 0.3;
+            const duracion = Math.random() * 2.5 + 1.5;
+            conf.style.transition = `transform ${duracion}s linear, top ${duracion}s ease-in`;
+            confContainer.appendChild(conf);
+            setTimeout(() => {
+                conf.style.top = '100vh';
+                conf.style.transform = `rotate(${Math.random() * 400}deg)`;
+            }, 15);
+        }
+        setTimeout(() => confContainer.remove(), 3000);
+    }
+
+    // botón confeti final página 4
+    const btnConfetiFinal = document.getElementById('btnConfetiFinal');
+    const finalMensajeDiv = document.getElementById('finalMensaje');
+    if(btnConfetiFinal) {
+        btnConfetiFinal.addEventListener('click', () => {
+            crearConfetiLigero();
+            finalMensajeDiv.innerHTML = '<span style="background:#ffded2; padding:10px 25px; border-radius:60px;"><i class="fas fa-star"></i> 🌟 ¡Que los 21 años te regalen todo lo que sueñas, Elizabeth! 🌟 <i class="fas fa-star"></i></span>';
+            setTimeout(() => {
+                finalMensajeDiv.innerHTML = '';
+            }, 4500);
+        });
+    }
+
+    // Detalle extra: cambiar emoji flotante cada cierto tiempo
+    const floatingDiv = document.querySelector('.floating-emoji');
+    if(floatingDiv) {
+        const emojis = ['🎂','💖','✨','🎈','🎁','🌸','🥂','🎉','🌟','🕯️','🍰','💫'];
+        setInterval(() => {
+            const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+            floatingDiv.innerHTML = randomEmoji + ' ' + emojis[Math.floor(Math.random() * emojis.length)];
+        }, 2200);
+    }
+
+    // Animación de bienvenida al cargar: pequeños destellos en consola amigable
+    console.log("%c✨🌸 Elizabeth, prepárate para tu nueva vuelta al sol 🌸✨", "color:#ff6f91; font-size:14px; font-weight:bold;");
+    console.log("%cPronto será un día inolvidable lleno de magia ✨", "color:#f29eb0; font-size:12px;");
+
+    // Agregar efecto de "revelación poética" en página2
+    // también para que todo sea suave y sin fecha exacta pero aludiendo al "amanecer de mañana"
+    const allPoems = document.querySelectorAll('.poem-box');
+    // para dar calidez
+</script>
+</body>
+</html>
